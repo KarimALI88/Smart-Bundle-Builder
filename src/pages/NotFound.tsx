@@ -6,13 +6,7 @@ const NotFound = () => {
 
   return (
     <div
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: 16,
-      }}
+      className="min-h-screen flex items-center justify-center p-4"
     >
       <Result
         status="404"

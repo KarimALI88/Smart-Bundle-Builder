@@ -20,15 +20,10 @@ const Login = () => {
 
   return (
     <div
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
+      className="min-h-screen flex items-center justify-center"
     >
-      <Card style={{ width: 420 }}>
-      <Typography.Title level={3} style={{ marginBottom: 8 }}>
+      <Card className="w-96">
+      <Typography.Title level={3} className="mb-2">
         Login
       </Typography.Title>
       <Typography.Paragraph type="secondary">
@@ -64,7 +59,7 @@ const Login = () => {
           <Checkbox>Remember me</Checkbox>
         </Form.Item>
 
-        <Form.Item style={{ marginBottom: 0 }}>
+        <Form.Item className="mb-0">
           <Button type="primary" htmlType="submit" block>
             Sign In
           </Button>
