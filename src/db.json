@@ -1,0 +1,85 @@
+{
+  "items": [
+    {
+      "id": "cpu-1",
+      "name": "Intel Core i5-12400F",
+      "price": 250,
+      "category": "CPU",
+      "incompatibleWith": ["mobo-3", "mobo-4"]
+    },
+    {
+      "id": "cpu-2",
+      "name": "Intel Core i7-12700K",
+      "price": 400,
+      "category": "CPU",
+      "incompatibleWith": ["mobo-3", "mobo-4"]
+    },
+    {
+      "id": "cpu-3",
+      "name": "AMD Ryzen 5 5600X",
+      "price": 220,
+      "category": "CPU",
+      "incompatibleWith": ["mobo-1", "mobo-2"]
+    },
+    {
+      "id": "cpu-4",
+      "name": "AMD Ryzen 7 5800X",
+      "price": 350,
+      "category": "CPU",
+      "incompatibleWith": ["mobo-1", "mobo-2"]
+    },
+
+
+
+
+
+    {
+      "id": "mobo-1",
+      "name": "ASUS Prime Intel B660",
+      "price": 150,
+      "category": "Motherboard",
+      "incompatibleWith": ["cpu-3", "cpu-4"]
+    },
+    {
+      "id": "mobo-2",
+      "name": "MSI Intel Z690",
+      "price": 200,
+      "category": "Motherboard",
+      "incompatibleWith": ["cpu-3", "cpu-4"]
+    },
+    {
+      "id": "mobo-3",
+      "name": "Gigabyte AMD B550",
+      "price": 140,
+      "category": "Motherboard",
+      "incompatibleWith": ["cpu-1", "cpu-2"]
+    },
+    {
+      "id": "mobo-4",
+      "name": "ASRock AMD X570",
+      "price": 220,
+      "category": "Motherboard",
+      "incompatibleWith": ["cpu-1", "cpu-2"]
+    },
+
+
+
+
+    
+
+    {
+      "id": "ram-1",
+      "name": "16GB DDR4 3200MHz",
+      "price": 80,
+      "category": "RAM",
+      "incompatibleWith": []
+    },
+    {
+      "id": "ram-2",
+      "name": "32GB DDR4 3600MHz",
+      "price": 150,
+      "category": "RAM",
+      "incompatibleWith": []
+    }
+  ]
+}
