@@ -4,10 +4,11 @@ import {
   ShoppingCartOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { Layout, Menu, Typography } from "antd";
+import { Layout, Menu, Typography, Grid } from "antd";
 
 const { Sider } = Layout;
 const { Title, Text } = Typography;
+const { useBreakpoint } = Grid;
 
 interface SideBarProps {
   collapsed: boolean;
@@ -22,6 +23,8 @@ const menuItems = [
 ];
 
 const SideBar = ({ collapsed, onCollapse }: SideBarProps) => {
+  const screens = useBreakpoint();
+
   return (
     <Sider
       width={260}
@@ -29,12 +32,15 @@ const SideBar = ({ collapsed, onCollapse }: SideBarProps) => {
       collapsed={collapsed}
       onCollapse={onCollapse}
       theme="dark"
+      breakpoint="lg"
+      collapsedWidth="0"
       style={{
-        position: "sticky",
+        position: screens.lg === false ? "absolute" : "sticky",
         top: 0,
         left: 0,
         height: "100vh",
         borderRight: "1px solid rgba(255,255,255,0.08)",
+        zIndex: 1000,
       }}
     >
       <div className="px-4 py-6">

@@ -20,10 +20,10 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
       <SideBar collapsed={collapsed} onCollapse={setCollapsed} />
       <Layout>
         <TopBar />
-        <Content style={{ margin: "0 16px" }}>
+        <Content className="mx-2 my-2 sm:mx-4">
           <div
+            className="p-4 sm:p-6"
             style={{
-              padding: 24,
               minHeight: 360,
               background: colorBgContainer,
               borderRadius: borderRadiusLG,

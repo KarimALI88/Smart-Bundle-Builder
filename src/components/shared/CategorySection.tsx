@@ -41,10 +41,10 @@ export default function CategorySection({
   }
 
   return (
-    <div className="my-12">
-      <h3>{title}</h3>
+    <div className="my-8 md:my-12">
+      <h3 className="text-xl font-semibold mb-4">{title}</h3>
 
-      <div className="flex gap-16 flex-wrap">
+      <div className="flex gap-4 sm:gap-6 md:gap-10 lg:gap-16 flex-wrap justify-center sm:justify-start">
         {items.map((item) => {
           const isSelected = selectedItems.some(i => i.id === item.id)
 

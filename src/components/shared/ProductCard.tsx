@@ -39,7 +39,7 @@ const ProductCard = ({
           onClick(item)
         }
       }}
-      className={`w-[250px] rounded-xl border transition-all
+      className={`w-full sm:w-[250px] rounded-xl border transition-all
         ${isSelected ? "border-blue-500 shadow-[0_0_0_1px_#3b82f6]" : "border-slate-200"}
         ${isDisabled || isOverBudget ? "cursor-not-allowed opacity-60" : "cursor-pointer"}
         focus:outline-none focus:ring-2 focus:ring-blue-500

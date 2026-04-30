@@ -52,7 +52,7 @@ const BuildSummaryItem = ({
       </div>
 
       {/* Price Section */}
-      <div className="mx-4 shrink-0">
+      <div className="mx-2 sm:mx-4 shrink-0">
         <Text className="text-base font-bold text-slate-800">
           ${price}
         </Text>

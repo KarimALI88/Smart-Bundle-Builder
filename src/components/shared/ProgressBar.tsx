@@ -6,8 +6,8 @@ const ProgressBar = () => {
   const { total } = useTotal();
 
   return (
-    <div className="w-[60%] rounded-md px-2 py-1">
-      <div className="flex items-center gap-3">
+    <div className="w-full md:w-[60%] rounded-md px-2 py-1">
+      <div className="flex flex-wrap sm:flex-nowrap items-center gap-2 sm:gap-3">
         <div className="min-w-[96px] leading-tight">
           <p className="text-[10px] font-medium uppercase tracking-wide text-gray-400">Budget</p>
           <p className="text-[20px] font-semibold text-primary">

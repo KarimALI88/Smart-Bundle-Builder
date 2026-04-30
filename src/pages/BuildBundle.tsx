@@ -108,7 +108,7 @@ const BuildBundle = () => {
     <div>
 
       {/* action buttons */}
-      <div className="flex gap-3 mb-3">
+      <div className="flex flex-wrap gap-2 sm:gap-3 mb-3">
 
         <Button onClick={undo} icon={<UndoOutlined />}>
           Undo (Ctrl+Z)
