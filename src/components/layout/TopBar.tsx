@@ -1,11 +1,9 @@
-import LightDark from "../publicComponents/LightDark";
-import LogoComp from "../publicComponents/LogoComp";
-import ProgressBar from "../publicComponents/ProgressBar";
+import LightDark from "@/components/publicComponents/LightDark";
+import ProgressBar from "@/components/publicComponents/ProgressBar";
 
 const TobBar = () => {
   return (
     <div className="flex justify-between items-center p-4 mb-4">
-      <LogoComp />
       <ProgressBar />
       <LightDark />
     </div>

@@ -1,8 +1,7 @@
-import React from 'react'
 
 const BuildBundle = () => {
   return (
-    <div>BuildBundle</div>
+    <div className="">BuildBundle</div>
   )
 }
 
