@@ -5,6 +5,8 @@ import { DownloadOutlined, UndoOutlined, RedoOutlined, ClearOutlined } from "@an
 import { useTotal } from "@/context/TotalContext"
 import { Affix, Button, Col, Row } from "antd"
 import { useEffect, useState } from "react"
+import jsPDF from "jspdf"
+import { toPng } from "html-to-image"
 
 const BuildBundle = () => {
 
@@ -78,6 +80,27 @@ const BuildBundle = () => {
   ])
 
   const { update, undo, redo, selectedItems, total } = useTotal()
+  const [isExtracting, setIsExtracting] = useState(false)
+
+  const handleExtractPDF = async () => {
+    const element = document.getElementById("build-summary-content")
+    if (element) {
+      setIsExtracting(true)
+      try {
+        const dataUrl = await toPng(element, { backgroundColor: '#ffffff', pixelRatio: 2 })
+        const pdf = new jsPDF("p", "mm", "a4")
+        const pdfWidth = pdf.internal.pageSize.getWidth()
+        const pdfHeight = (element.offsetHeight * pdfWidth) / element.offsetWidth
+        pdf.addImage(dataUrl, "PNG", 0, 0, pdfWidth, pdfHeight)
+        pdf.save("build-summary.pdf")
+      } catch (err) {
+        console.error("Failed to generate PDF", err)
+      } finally {
+        setIsExtracting(false)
+      }
+    }
+  }
+
 
   const clearBuilds = () => {
     update({ selectedItems: [] })
@@ -159,20 +182,29 @@ const BuildBundle = () => {
         <Col xs={24} lg={7}>
           <Affix offsetTop={16}>
             <div className="p-4 border rounded-xl">
+              <div id="build-summary-content" className="bg-white">
+                <h3>Build Summary</h3>
 
-              <h3>Build Summary</h3>
+                <div className="my-4">
+                  {selectedItems.map(item => (
+                    <BuildSummaryItem key={item.id} item={item} />
+                  ))}
+                </div>
 
-              <div className="my-4">
-                {selectedItems.map(item => (
-                  <BuildSummaryItem key={item.id} item={item} />
-                ))}
+                <div>
+                  <p className="text-lg font-bold text-black">Total <span className="text-slate-500 text-md font-semibold">{total}</span></p>
+                </div>
               </div>
 
-              <div>
-                <p className="text-lg font-bold text-black">Total <span className="text-slate-500 text-md font-semibold">{total}</span></p>
-              </div>
-
-              <Button type="primary" block icon={<DownloadOutlined />}>
+              <Button
+                type="primary"
+                block
+                icon={<DownloadOutlined />}
+                disabled={selectedItems.length === 0}
+                onClick={handleExtractPDF}
+                loading={isExtracting}
+                className="mt-4"
+              >
                 Extract PDF
               </Button>
 
