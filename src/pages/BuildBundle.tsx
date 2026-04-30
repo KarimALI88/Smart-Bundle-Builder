@@ -1,7 +1,7 @@
 
 import CategorySection from "@/components/publicComponents/CategorySection"
 import { UndoOutlined } from "@ant-design/icons"
-import { Button } from "antd"
+import { Affix, Button, Col, Row } from "antd"
 import { useState } from "react"
 
 const BuildBundle = () => {
@@ -134,26 +134,46 @@ const BuildBundle = () => {
       </div>
       <hr className="border-gray-300" />
       {/* ---------------------- categories and items--------------------- */}
-      <CategorySection
-        title="CPU"
-        items={items.filter(i => i.category === "CPU")}
-        selectedItem={selectedItem["CPU"]}
-        onSelect={handleSelect}
-      />
+      <Row gutter={[16, 16]} className="mt-4">
+        {/* categories and items */}
+        <Col xs={24} lg={17} xl={18}>
+          <CategorySection
+            title="CPU"
+            items={items.filter(i => i.category === "CPU")}
+            selectedItem={selectedItem["CPU"]}
+            onSelect={handleSelect}
+          />
 
-      <CategorySection
-        title="Motherboard"
-        items={items.filter(i => i.category === "Motherboard")}
-        selectedItem={selectedItem["Motherboard"]}
-        onSelect={handleSelect}
-      />
+          <CategorySection
+            title="Motherboard"
+            items={items.filter(i => i.category === "Motherboard")}
+            selectedItem={selectedItem["Motherboard"]}
+            onSelect={handleSelect}
+          />
 
-      <CategorySection
-        title="RAM"
-        items={items.filter(i => i.category === "RAM")}
-        selectedItem={selectedItem["RAM"]}
-        onSelect={handleSelect}
-      />
+          <CategorySection
+            title="RAM"
+            items={items.filter(i => i.category === "RAM")}
+            selectedItem={selectedItem["RAM"]}
+            onSelect={handleSelect}
+          />
+        </Col>
+        {/* summary */}
+        <Col xs={24} lg={7} xl={6} className="self-start" >
+          <Affix offsetTop={16}>
+            <div className="min-h-[240px] rounded-xl border border-slate-200 p-4">
+              {/* build summary */}
+              <div className="bg-secondary-100 shadow-2xl my-5 min-h-4 rounded-xl">
+
+              </div>
+              {/* key board shortcuts */}
+              <div className="bg-secondary-100 shadow-2xl my-5 min-h-4 rounded-xl">
+
+              </div>
+            </div>
+          </Affix>
+        </Col>
+      </Row>
     </div>
   )
 }

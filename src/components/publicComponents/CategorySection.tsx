@@ -28,7 +28,7 @@ export default function CategorySection({
     <div className="my-12">
       <h3>{title}</h3>
 
-      <div style={{ display: "flex", gap: 16 }}>
+      <div className="flex gap-16 flex-wrap">
         {items.map((item) => {
           const isSelected = selectedItem?.id === item.id
           const isDisabled = disabledItems.includes(item.id)
