@@ -1,5 +1,5 @@
-import LightDark from "@/components/publicComponents/LightDark";
-import ProgressBar from "@/components/publicComponents/ProgressBar";
+import LightDark from "@/components/shared/LightDark";
+import ProgressBar from "@/components/shared/ProgressBar";
 
 const TobBar = () => {
   return (

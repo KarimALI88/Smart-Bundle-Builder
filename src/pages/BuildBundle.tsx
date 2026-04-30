@@ -1,10 +1,10 @@
-import BuildSummaryItem from "@/components/publicComponents/BuildSummaryItem"
-import CategorySection from "@/components/publicComponents/CategorySection"
-import KeyShortcut from "@/components/publicComponents/KeyShortcut"
+import BuildSummaryItem from "@/components/shared/BuildSummaryItem"
+import CategorySection from "@/components/shared/CategorySection"
+import KeyShortcut from "@/components/shared/KeyShortcut"
 import { DownloadOutlined, UndoOutlined, RedoOutlined, ClearOutlined } from "@ant-design/icons"
+import { useTotal } from "@/context/TotalContext"
 import { Affix, Button, Col, Row } from "antd"
 import { useEffect, useState } from "react"
-import { useHistory } from "@/hooks/useHistory"
 
 const BuildBundle = () => {
 
@@ -76,13 +76,13 @@ const BuildBundle = () => {
       incompatibleWith: []
     }
   ])
-  const { history, update, undo, redo } = useHistory({
-    selectedItems: []
-  })
-  const selectedItems = history.present.selectedItems
+
+  const { update, undo, redo, selectedItems, total } = useTotal()
+
   const clearBuilds = () => {
     update({ selectedItems: [] })
   }
+
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if (e.ctrlKey && e.key === "z") {
@@ -166,6 +166,10 @@ const BuildBundle = () => {
                 {selectedItems.map(item => (
                   <BuildSummaryItem key={item.id} item={item} />
                 ))}
+              </div>
+
+              <div>
+                <p className="text-lg font-bold text-black">Total <span className="text-slate-500 text-md font-semibold">{total}</span></p>
               </div>
 
               <Button type="primary" block icon={<DownloadOutlined />}>
