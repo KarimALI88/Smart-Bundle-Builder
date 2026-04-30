@@ -76,17 +76,13 @@ const BuildBundle = () => {
       incompatibleWith: []
     }
   ])
-
   const { history, update, undo, redo } = useHistory({
     selectedItems: []
   })
-
   const selectedItems = history.present.selectedItems
-
   const clearBuilds = () => {
     update({ selectedItems: [] })
   }
-
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if (e.ctrlKey && e.key === "z") {

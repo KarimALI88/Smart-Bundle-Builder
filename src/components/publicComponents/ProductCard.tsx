@@ -16,17 +16,37 @@ type ProductCardProps = {
   onClick: (item: Item) => void
 }
 
-const ProductCard = ({ item, isSelected, isDisabled = false, onClick }: ProductCardProps) => {
+const ProductCard = ({
+  item,
+  isSelected,
+  isDisabled = false,
+  onClick
+}: ProductCardProps) => {
   return (
     <Card
       hoverable={!isDisabled}
+      tabIndex={isDisabled ? -1 : 0} 
+      role="radio"
+      aria-checked={isSelected}
+      aria-disabled={isDisabled}
       onClick={() => !isDisabled && onClick(item)}
-      className={`w-[250px] rounded-xl border transition-all ${isSelected ? "border-blue-500 shadow-[0_0_0_1px_#3b82f6]" : "border-slate-200"
-        } ${isDisabled ? "cursor-not-allowed opacity-60" : "cursor-pointer"}`}
+      onKeyDown={(e) => {
+        if (isDisabled) return
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault()
+          onClick(item)
+        }
+      }}
+      className={`w-[250px] rounded-xl border transition-all
+        ${isSelected ? "border-blue-500 shadow-[0_0_0_1px_#3b82f6]" : "border-slate-200"}
+        ${isDisabled ? "cursor-not-allowed opacity-60" : "cursor-pointer"}
+        focus:outline-none focus:ring-2 focus:ring-blue-500
+      `}
       bodyStyle={{ padding: 12 }}
     >
       <div className="flex items-start justify-between">
-        <Radio checked={isSelected} />
+        <Radio checked={isSelected} disabled={isDisabled} />
+
         {isDisabled && (
           <Tag color="error" className="m-0 rounded-full text-[10px] font-semibold">
             Incompatible
@@ -37,7 +57,11 @@ const ProductCard = ({ item, isSelected, isDisabled = false, onClick }: ProductC
       <div className="mt-2 flex gap-3">
         <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-slate-50 p-1">
           {item.image ? (
-            <img src={item.image} alt={item.name} className="h-full w-full object-contain" />
+            <img
+              src={item.image}
+              alt={item.name}
+              className="h-full w-full object-contain"
+            />
           ) : (
             <CloseSquareOutlined className="text-xl text-slate-300" />
           )}
@@ -47,12 +71,14 @@ const ProductCard = ({ item, isSelected, isDisabled = false, onClick }: ProductC
           <Typography.Text className="block truncate text-sm font-semibold text-slate-700">
             {item.name}
           </Typography.Text>
+
           <Typography.Paragraph
             className="m-0 mt-1 text-xs text-slate-400"
             ellipsis={{ rows: 2, tooltip: item.name }}
           >
             Great performance for your build.
           </Typography.Paragraph>
+
           <Typography.Text className="mt-1 block text-lg font-semibold text-blue-600">
             ${item.price}
           </Typography.Text>
