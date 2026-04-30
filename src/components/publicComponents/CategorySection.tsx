@@ -12,33 +12,30 @@ type Item = {
 type Props = {
   title: string
   items: Item[]
-  selectedItems?: any
-  setSelectedItems?: any
+  selectedItems: Item[]
+  onChange: (items: Item[]) => void
 }
 
 export default function CategorySection({
   title,
   items,
   selectedItems,
-  setSelectedItems
+  onChange
 }: Props) {
 
   const handleSelect = (item: Item) => {
-    const alreadyExist = selectedItems?.some((i: any) => i.id === item.id)
+    const alreadyExist = selectedItems.some(i => i.id === item.id)
+
+    let newItems: Item[]
+
     if (alreadyExist) {
-      setSelectedItems((prev: any) => {
-        return [
-          prev.filter((i: any) => i.id !== item.id)
-        ]
-      })
+      newItems = selectedItems.filter(i => i.id !== item.id)
     } else {
-      setSelectedItems((prev: any) => {
-        return [
-          ...prev,
-          item
-        ]
-      })
+      const filtered = selectedItems.filter(i => i.category !== item.category)
+      newItems = [...filtered, item]
     }
+
+    onChange(newItems)
   }
 
   return (
@@ -47,16 +44,19 @@ export default function CategorySection({
 
       <div className="flex gap-16 flex-wrap">
         {items.map((item) => {
-          const isSelected = selectedItems?.some((i: any) => i.id === item.id)
-          const isDisabled = selectedItems?.some((i: any) => i.incompatibleWith?.includes(item.id))
-          
+          const isSelected = selectedItems.some(i => i.id === item.id)
+
+          const isDisabled = selectedItems.some(i =>
+            i.incompatibleWith?.includes(item.id)
+          )
+
           return (
             <ProductCard
               key={item.id}
               item={item}
               isSelected={isSelected}
               isDisabled={isDisabled}
-              onClick={(item: Item) => handleSelect(item)}
+              onClick={() => handleSelect(item)}
             />
           )
         })}

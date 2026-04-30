@@ -4,6 +4,7 @@ import { DeleteOutlined, DatabaseOutlined } from "@ant-design/icons"
 const { Text } = Typography
 
 interface BuildSummaryItemProps {
+  item?: any
   category?: string
   itemName?: string
   price?: number | string
@@ -13,8 +14,7 @@ interface BuildSummaryItemProps {
 }
 
 const BuildSummaryItem = ({
-  category = "CPU",
-  itemName = "Intel Core i5",
+  item,
   price = 250,
   image,
   icon,
@@ -35,7 +35,7 @@ const BuildSummaryItem = ({
       {/* Icon/Image Container */}
       <div className="mr-4 flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-slate-50 text-2xl text-slate-400 overflow-hidden">
         {image ? (
-          <img src={image} alt={itemName} className="h-full w-full object-contain p-1.5" />
+          <img src={image} alt={item?.name} className="h-full w-full object-contain p-1.5" />
         ) : (
           icon || <DatabaseOutlined />
         )}
@@ -44,10 +44,10 @@ const BuildSummaryItem = ({
       {/* Details Container */}
       <div className="flex flex-1 flex-col min-w-0">
         <Text type="secondary" className="text-[11px] font-medium leading-[1.2] uppercase tracking-wide opacity-70">
-          {category}
+          {item?.category}
         </Text>
         <Text className="truncate text-[15px] font-semibold text-slate-700">
-          {itemName}
+          {item?.name}
         </Text>
       </div>
 
