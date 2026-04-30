@@ -1,73 +1,74 @@
-# React + TypeScript + Vite
+# Smart Bundle Builder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A professional, high-performance PC bundle building application built with React, TypeScript, and Ant Design. This project features a robust undo/redo system, real-time total calculation, and PDF export functionality.
 
-Currently, two official plugins are available:
+## 🚀 Getting Started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### Prerequisites
+- Node.js (v18 or higher)
+- npm or yarn
 
-## React Compiler
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/KarimALI88/Smart-Bundle-Builder.git
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Running the Project
+The project requires both the frontend and a mock API server to be running (if using the API mode).
 
-## Expanding the ESLint configuration
+1. **Start the Mock API (json-server):**
+   ```bash
+   npx json-server --watch db.json --port 3000
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+   json-server --watch db.json --port 3000
+   ```
+2. **Start the Development Server:**
+   ```bash
+   npm run dev
+   ```
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🏗 Architecture: Undo/Redo State Logic
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+The state management for the bundle selection is powered by a custom `useHistory` hook located in `src/hooks/useHistory.ts`. This hook implements a "Time Travel" state pattern.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### How it works:
+- **State Structure:** The history state is divided into three parts: `past`, `present`, and `future`.
+- **Data Flow:**
+  - **Present:** This is the current state being rendered in the UI (the active `selectedItems`).
+  - **Update Action:** When a user selects a new item or modifies the bundle, the current `present` state is pushed into the `past` array, the new data becomes the `present`, and the `future` array is cleared.
+  - **Undo:** Moves the last item from `past` to `present` and pushes the current `present` into `future`.
+  - **Redo:** Moves the first item from `future` to `present` and pushes the current `present` into `past`.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+This approach ensures that every user action is tracked, providing a seamless undo/redo experience with keyboard shortcuts (Ctrl+Z / Ctrl+Y).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 📝 Important Notes
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Switching between Static and API Data
+By default, the project may be set to use static mock data for initial testing. To switch to the full API integration (using React Query and Axios):
+
+1. Open `src/pages/BuildBundle.tsx`.
+2. **Uncomment** the following lines:
+   - Line 10: `import { useItems } from "@/hooks/items/useItems"`
+   - Line 82: `const {data: items, isPending, error} = useItems()`
+   - Line 133: `if (isPending) return <div>Loading...</div>`
+   - Line 135: `if (error) return <div>Error try after some minutes</div>`
+3. **Comment out** the static data block:
+   - Lines 13 to 80 (The `const [items] = useState([...])` block).
+
+### Key Features
+- **Keyboard Shortcuts:** Support for Ctrl+Z (Undo), Ctrl+Y (Redo), and Delete (Clear Build).
+- **PDF Export:** Extract your current build configuration into a clean PDF document.
+- **Incompatibility Checks:** Real-time validation to ensure selected components (CPU/Motherboard) are compatible.
+- **Responsive Design:** Fully optimized for mobile, tablet, and desktop screens.
+
+## 🛠 Tech Stack
+- **Frontend:** React 19, Vite, TypeScript
+- **UI Library:** Ant Design (antd)
+- **Styling:** Tailwind CSS
+- **Data Fetching:** TanStack Query (React Query) & Axios
+- **Utilities:** jsPDF, html-to-image (for PDF generation)
