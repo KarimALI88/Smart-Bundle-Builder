@@ -3,13 +3,14 @@ import { Switch } from "antd";
 
 const LightDark = () => {
   return (
-    <div className="inline-flex items-center rounded-full bg-gray-100 p-1">
+    <div className="inline-flex items-center gap-2 rounded-full bg-gray-100 px-2 py-1">
+      <SunFilled className="text-[12px] text-slate-500" />
       <Switch
-        size="default"
+        size="small"
         defaultChecked
-        checkedChildren={<MoonFilled className="text-[20px]" />}
-        unCheckedChildren={<SunFilled className="text-[20px]" />}
+        className="[&_.ant-switch-handle]:!before:bg-white"
       />
+      <MoonFilled className="text-[12px] text-slate-500" />
     </div>
   );
 };
