@@ -77,9 +77,10 @@ const BuildBundle = () => {
   ])
   const [selectedItems, setSelectedItems] = useState([])
 
-  const handleSelect = (item: any) => {
-    
+  const clearBuilds = () => {
+    setSelectedItems([])
   }
+
   return (
     <div className="">
       {/* action buttons (undo - redo - clear build) */}
@@ -104,6 +105,7 @@ const BuildBundle = () => {
         <Button
           type="default"
           icon={<UndoOutlined className="text-[12px] text-red-800!" />}
+          onClick={clearBuilds}
           className="h-12! rounded-lg! border-slate-200! bg-slate-50! px-3! text-xs! font-medium! text-red-800! shadow-none hover:border-slate-300! hover:bg-slate-100!"
         >
           Clear Build
