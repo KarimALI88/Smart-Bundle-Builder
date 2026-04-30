@@ -22,7 +22,7 @@ const ProgressBar = () => {
             strokeLinecap="round"
             strokeColor="#1977FF"
             railColor="#E6E8EE"
-            size={[undefined, 10]}
+            size={["100%", 10]}
           />
         </div>
 
