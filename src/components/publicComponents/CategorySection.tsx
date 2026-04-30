@@ -12,26 +12,33 @@ type Item = {
 type Props = {
   title: string
   items: Item[]
-  selectedItem?: Item
-  onSelect: (item: Item) => void
-  disabledItems?: string[]
+  selectedItems?: any
+  setSelectedItems?: any
 }
 
 export default function CategorySection({
   title,
   items,
-  selectedItem,
-  onSelect,
-  disabledItems = [],
+  selectedItems,
+  setSelectedItems
 }: Props) {
+
+  const handleSelect = (item: Item) => {
+    setSelectedItems((prev: any) => {
+      return [
+        ...prev,
+        item
+      ]
+    })
+  }
   return (
     <div className="my-12">
       <h3>{title}</h3>
 
       <div className="flex gap-16 flex-wrap">
         {items.map((item) => {
-          const isSelected = selectedItem?.id === item.id
-          const isDisabled = disabledItems.includes(item.id)
+          const isSelected = selectedItems[title]?.id === item.id
+          const isDisabled = items.some((i) => i.incompatibleWith.includes(item.id))
 
           return (
             <ProductCard
@@ -39,7 +46,7 @@ export default function CategorySection({
               item={item}
               isSelected={isSelected}
               isDisabled={isDisabled}
-              onClick={() => onSelect(item)}
+              onClick={(item: Item) => handleSelect(item)}
             />
           )
         })}

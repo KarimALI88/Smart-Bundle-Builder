@@ -10,100 +10,75 @@ const BuildBundle = () => {
   const [items, setItems] = useState([
     {
       "id": "cpu-1",
-      "name": "Intel Core i5-12400F",
-      "price": 250,
+      "name": "Intel Core i5",
+      "price": 220,
       "category": "CPU",
       "image": "https://img.magnific.com/premium-vector/processor-cpu-vector-design-template_471203-1174.jpg",
       "incompatibleWith": ["mobo-3", "mobo-4"]
     },
     {
       "id": "cpu-2",
-      "name": "Intel Core i7-12700K",
-      "price": 400,
+      "name": "Intel Core i7",
+      "price": 380,
       "category": "CPU",
       "image": "https://img.magnific.com/premium-vector/processor-cpu-vector-design-template_471203-1174.jpg",
       "incompatibleWith": ["mobo-3", "mobo-4"]
     },
     {
       "id": "cpu-3",
-      "name": "AMD Ryzen 5 5600X",
-      "price": 220,
+      "name": "AMD Ryzen 5",
+      "price": 200,
       "category": "CPU",
       "image": "https://img.magnific.com/premium-vector/processor-cpu-vector-design-template_471203-1174.jpg",
       "incompatibleWith": ["mobo-1", "mobo-2"]
     },
-    {
-      "id": "cpu-4",
-      "name": "AMD Ryzen 7 5800X",
-      "price": 350,
-      "category": "CPU",
-      "image": "https://img.magnific.com/premium-vector/processor-cpu-vector-design-template_471203-1174.jpg",
-      "incompatibleWith": ["mobo-1", "mobo-2"]
-    },
-
-
-
-
 
     {
       "id": "mobo-1",
-      "name": "ASUS Prime Intel B660",
-      "price": 150,
+      "name": "Intel Basic Board",
+      "price": 120,
       "category": "Motherboard",
       "image": "http://png.pngtree.com/png-vector/20230208/ourmid/pngtree-motherboard-vector-icon-design-illustration-png-image_6591858.png",
-      "incompatibleWith": ["cpu-3", "cpu-4"]
+      "incompatibleWith": ["cpu-3"]
     },
     {
       "id": "mobo-2",
-      "name": "MSI Intel Z690",
+      "name": "Intel High-End Board",
       "price": 200,
       "category": "Motherboard",
       "image": "http://png.pngtree.com/png-vector/20230208/ourmid/pngtree-motherboard-vector-icon-design-illustration-png-image_6591858.png",
-      "incompatibleWith": ["cpu-3", "cpu-4"]
+      "incompatibleWith": ["cpu-3"]
     },
     {
       "id": "mobo-3",
-      "name": "Gigabyte AMD B550",
-      "price": 140,
+      "name": "AMD Basic Board",
+      "price": 110,
       "category": "Motherboard",
       "image": "http://png.pngtree.com/png-vector/20230208/ourmid/pngtree-motherboard-vector-icon-design-illustration-png-image_6591858.png",
       "incompatibleWith": ["cpu-1", "cpu-2"]
     },
-    {
-      "id": "mobo-4",
-      "name": "ASRock AMD X570",
-      "price": 220,
-      "category": "Motherboard",
-      "image": "http://png.pngtree.com/png-vector/20230208/ourmid/pngtree-motherboard-vector-icon-design-illustration-png-image_6591858.png",
-      "incompatibleWith": ["cpu-1", "cpu-2"]
-    },
-
-
-
-
-
 
     {
       "id": "ram-1",
-      "name": "16GB DDR4 3200MHz",
-      "price": 80,
+      "name": "16GB RAM",
+      "price": 70,
       "category": "RAM",
       "image": "https://png.pngtree.com/png-clipart/20220105/ourmid/pngtree-buckle-free-hand-drawn-computer-memory-module-png-image_4080924.png",
       "incompatibleWith": []
     },
     {
       "id": "ram-2",
-      "name": "32GB DDR4 3600MHz",
-      "price": 150,
+      "name": "32GB RAM",
+      "price": 130,
       "category": "RAM",
       "image": "https://png.pngtree.com/png-clipart/20220105/ourmid/pngtree-buckle-free-hand-drawn-computer-memory-module-png-image_4080924.png",
       "incompatibleWith": []
     }
   ])
-  const [selectedItem, setSelectedItem] = useState({})
+  const [selectedItems, setSelectedItems] = useState([])
 
   const handleSelect = (item: any) => {
-    console.log("selected item", item)
+    
   }
   return (
     <div className="">
@@ -142,22 +117,22 @@ const BuildBundle = () => {
           <CategorySection
             title="CPU"
             items={items.filter(i => i.category === "CPU")}
-            selectedItem={selectedItem["CPU"]}
-            onSelect={handleSelect}
+            selectedItems={selectedItems}
+            setSelectedItems={setSelectedItems}
           />
 
           <CategorySection
             title="Motherboard"
             items={items.filter(i => i.category === "Motherboard")}
-            selectedItem={selectedItem["Motherboard"]}
-            onSelect={handleSelect}
+            selectedItems={selectedItems}
+            setSelectedItems={setSelectedItems}
           />
 
           <CategorySection
             title="RAM"
             items={items.filter(i => i.category === "RAM")}
-            selectedItem={selectedItem["RAM"]}
-            onSelect={handleSelect}
+            selectedItems={selectedItems}
+            setSelectedItems={setSelectedItems}
           />
         </Col>
         {/* summary */}

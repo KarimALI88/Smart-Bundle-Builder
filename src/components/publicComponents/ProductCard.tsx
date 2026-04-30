@@ -13,14 +13,14 @@ type ProductCardProps = {
   item: Item
   isSelected: boolean
   isDisabled?: boolean
-  onClick: () => void
+  onClick: (item: Item) => void
 }
 
 const ProductCard = ({ item, isSelected, isDisabled = false, onClick }: ProductCardProps) => {
   return (
     <Card
       hoverable={!isDisabled}
-      onClick={() => !isDisabled && onClick()}
+      onClick={() => !isDisabled && onClick(item)}
       className={`w-[250px] rounded-xl border transition-all ${
         isSelected ? "border-blue-500 shadow-[0_0_0_1px_#3b82f6]" : "border-slate-200"
       } ${isDisabled ? "cursor-not-allowed opacity-60" : "cursor-pointer"}`}
