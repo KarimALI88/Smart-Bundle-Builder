@@ -1,5 +1,66 @@
-const ProductCard = () => {
-  return <div>ProductCard</div>;
-};
+import { Card, Radio, Tag, Typography } from "antd"
+import { CloseSquareOutlined } from "@ant-design/icons"
 
-export default ProductCard;
+type Item = {
+  id: string
+  name: string
+  price: number
+  category: string
+  image?: string
+}
+
+type ProductCardProps = {
+  item: Item
+  isSelected: boolean
+  isDisabled?: boolean
+  onClick: () => void
+}
+
+const ProductCard = ({ item, isSelected, isDisabled = false, onClick }: ProductCardProps) => {
+  return (
+    <Card
+      hoverable={!isDisabled}
+      onClick={() => !isDisabled && onClick()}
+      className={`w-[250px] rounded-xl border transition-all ${
+        isSelected ? "border-blue-500 shadow-[0_0_0_1px_#3b82f6]" : "border-slate-200"
+      } ${isDisabled ? "cursor-not-allowed opacity-60" : "cursor-pointer"}`}
+      bodyStyle={{ padding: 12 }}
+    >
+      <div className="flex items-start justify-between">
+        <Radio checked={isSelected} />
+        {isDisabled && (
+          <Tag color="error" className="m-0 rounded-full text-[10px] font-semibold">
+            Incompatible
+          </Tag>
+        )}
+      </div>
+
+      <div className="mt-2 flex gap-3">
+        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-slate-50 p-1">
+          {item.image ? (
+            <img src={item.image} alt={item.name} className="h-full w-full object-contain" />
+          ) : (
+            <CloseSquareOutlined className="text-xl text-slate-300" />
+          )}
+        </div>
+
+        <div className="min-w-0">
+          <Typography.Text className="block truncate text-sm font-semibold text-slate-700">
+            {item.name}
+          </Typography.Text>
+          <Typography.Paragraph
+            className="m-0 mt-1 text-xs text-slate-400"
+            ellipsis={{ rows: 2, tooltip: item.name }}
+          >
+            Great performance for your build.
+          </Typography.Paragraph>
+          <Typography.Text className="mt-1 block text-lg font-semibold text-blue-600">
+            ${item.price}
+          </Typography.Text>
+        </div>
+      </div>
+    </Card>
+  )
+}
+
+export default ProductCard

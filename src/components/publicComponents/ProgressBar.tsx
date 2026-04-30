@@ -23,7 +23,7 @@ const ProgressBar = ({ spent = 480, total = 1000, percent = 48 }: ProgressBarPro
             showInfo={false}
             strokeLinecap="round"
             strokeColor="#1977FF"
-            trailColor="#E6E8EE"
+            railColor="#E6E8EE"
             size={[undefined, 10]}
           />
         </div>
