@@ -45,7 +45,7 @@ const BuildBundle = () => {
     {
       id: "mobo-2",
       name: "Intel High-End Board",
-      price: 200,
+      price: 600,
       category: "Motherboard",
       image: "http://png.pngtree.com/png-vector/20230208/ourmid/pngtree-motherboard-vector-icon-design-illustration-png-image_6591858.png",
       incompatibleWith: ["cpu-3"]

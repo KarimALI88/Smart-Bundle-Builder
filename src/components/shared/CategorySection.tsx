@@ -1,4 +1,5 @@
 import ProductCard from "./ProductCard"
+import { useTotal } from "@/context/TotalContext"
 
 type Item = {
   id: string
@@ -22,6 +23,7 @@ export default function CategorySection({
   selectedItems,
   onChange
 }: Props) {
+  const { total } = useTotal()
 
   const handleSelect = (item: Item) => {
     const alreadyExist = selectedItems.some(i => i.id === item.id)
@@ -50,12 +52,21 @@ export default function CategorySection({
             i.incompatibleWith?.includes(item.id)
           )
 
+          let isOverBudget = false
+          if (!isSelected) {
+            const currentCatSelected = selectedItems.find(i => i.category === item.category)
+            const currentCatPrice = currentCatSelected ? currentCatSelected.price : 0
+            const newTotal = total - currentCatPrice + item.price
+            isOverBudget = newTotal > 1000
+          }
+
           return (
             <ProductCard
               key={item.id}
               item={item}
               isSelected={isSelected}
               isDisabled={isDisabled}
+              isOverBudget={isOverBudget}
               onClick={() => handleSelect(item)}
             />
           )

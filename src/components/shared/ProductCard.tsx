@@ -13,6 +13,7 @@ type ProductCardProps = {
   item: Item
   isSelected: boolean
   isDisabled?: boolean
+  isOverBudget?: boolean
   onClick: (item: Item) => void
 }
 
@@ -20,18 +21,19 @@ const ProductCard = ({
   item,
   isSelected,
   isDisabled = false,
+  isOverBudget = false,
   onClick
 }: ProductCardProps) => {
   return (
     <Card
-      hoverable={!isDisabled}
-      tabIndex={isDisabled ? -1 : 0} 
+      hoverable={!isDisabled || isOverBudget}
+      tabIndex={isDisabled ? -1 : 0}
       role="radio"
       aria-checked={isSelected}
-      aria-disabled={isDisabled}
-      onClick={() => !isDisabled && onClick(item)}
+      aria-disabled={isDisabled || isOverBudget}
+      onClick={() => !isDisabled && !isOverBudget && onClick(item)}
       onKeyDown={(e) => {
-        if (isDisabled) return
+        if (isDisabled || isOverBudget) return
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault()
           onClick(item)
@@ -39,17 +41,23 @@ const ProductCard = ({
       }}
       className={`w-[250px] rounded-xl border transition-all
         ${isSelected ? "border-blue-500 shadow-[0_0_0_1px_#3b82f6]" : "border-slate-200"}
-        ${isDisabled ? "cursor-not-allowed opacity-60" : "cursor-pointer"}
+        ${isDisabled || isOverBudget ? "cursor-not-allowed opacity-60" : "cursor-pointer"}
         focus:outline-none focus:ring-2 focus:ring-blue-500
       `}
       bodyStyle={{ padding: 12 }}
     >
       <div className="flex items-start justify-between">
-        <Radio checked={isSelected} disabled={isDisabled} />
+        <Radio checked={isSelected} disabled={isDisabled || isOverBudget} />
 
         {isDisabled && (
           <Tag color="error" className="m-0 rounded-full text-[10px] font-semibold">
             Incompatible
+          </Tag>
+        )}
+
+        {isOverBudget && (
+          <Tag color="error" className="m-0 rounded-full text-[10px] font-semibold">
+            Will exceed 1000$
           </Tag>
         )}
       </div>
