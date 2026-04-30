@@ -7,7 +7,7 @@ import { Affix, Button, Col, Row } from "antd"
 import { useEffect, useState } from "react"
 import jsPDF from "jspdf"
 import { toPng } from "html-to-image"
-import { useItems } from "@/hooks/items/useItems"
+// import { useItems } from "@/hooks/items/useItems"
 
 const BuildBundle = () => {
   const [items] = useState([
