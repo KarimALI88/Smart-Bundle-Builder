@@ -1,6 +1,8 @@
 
+import BuildSummaryItem from "@/components/publicComponents/BuildSummaryItem"
 import CategorySection from "@/components/publicComponents/CategorySection"
-import { UndoOutlined } from "@ant-design/icons"
+import KeyShortcut from "@/components/publicComponents/KeyShortcut"
+import { DownloadOutlined, UndoOutlined } from "@ant-design/icons"
 import { Affix, Button, Col, Row } from "antd"
 import { useState } from "react"
 
@@ -163,12 +165,26 @@ const BuildBundle = () => {
           <Affix offsetTop={16}>
             <div className="min-h-[240px] rounded-xl border border-slate-200 p-4">
               {/* build summary */}
-              <div className="bg-secondary-100 shadow-2xl my-5 min-h-4 rounded-xl">
-
+              <h3 className="text-lg font-bold text-slate-800">Build Summary</h3>
+              <div className="bg-secondary-100 shadow-2xl my-5 min-h-4 rounded-xl p-2">
+                <BuildSummaryItem />
+                <BuildSummaryItem />
+              </div>
+              <div className="my-4">
+                <Button type="primary" block icon={<DownloadOutlined />}>
+                  Extract PDF
+                </Button>
               </div>
               {/* key board shortcuts */}
-              <div className="bg-secondary-100 shadow-2xl my-5 min-h-4 rounded-xl">
-
+              <div className="min-h-[240px] rounded-xl border border-slate-200 p-4">
+                <h3 className="text-lg font-bold text-slate-800">Key Board Shortcuts</h3>
+                <div className="bg-secondary-100 shadow-2xl my-5 min-h-4 rounded-xl p-2">
+                  <KeyShortcut title="Undo (Ctrl+Z)" shortcut="Undo (Ctrl+Z)" />
+                  <KeyShortcut title="Redo (Ctrl+Y)" shortcut="Redo (Ctrl+Y)" />
+                  <KeyShortcut title="Clear Build" shortcut="Del" />
+                  <KeyShortcut title="Navigate" shortcut="Tab" />
+                  <KeyShortcut title="Select Item" shortcut="Enter / Space" />
+                </div>
               </div>
             </div>
           </Affix>
