@@ -10,75 +10,76 @@ import { toPng } from "html-to-image"
 import { useItems } from "@/hooks/items/useItems"
 
 const BuildBundle = () => {
-  // const [items] = useState([
-  //   {
-  //     id: "cpu-1",
-  //     name: "Intel Core i5",
-  //     price: 220,
-  //     category: "CPU",
-  //     image: "https://img.magnific.com/premium-vector/processor-cpu-vector-design-template_471203-1174.jpg",
-  //     incompatibleWith: ["mobo-3", "mobo-4"]
-  //   },
-  //   {
-  //     id: "cpu-2",
-  //     name: "Intel Core i7",
-  //     price: 380,
-  //     category: "CPU",
-  //     image: "https://img.magnific.com/premium-vector/processor-cpu-vector-design-template_471203-1174.jpg",
-  //     incompatibleWith: ["mobo-3", "mobo-4"]
-  //   },
-  //   {
-  //     id: "cpu-3",
-  //     name: "AMD Ryzen 5",
-  //     price: 200,
-  //     category: "CPU",
-  //     image: "https://img.magnific.com/premium-vector/processor-cpu-vector-design-template_471203-1174.jpg",
-  //     incompatibleWith: ["mobo-1", "mobo-2"]
-  //   },
+  const [items] = useState([
+    {
+      id: "cpu-1",
+      name: "Intel Core i5",
+      price: 220,
+      category: "CPU",
+      image: "https://img.magnific.com/premium-vector/processor-cpu-vector-design-template_471203-1174.jpg",
+      incompatibleWith: ["mobo-3", "mobo-4"]
+    },
+    {
+      id: "cpu-2",
+      name: "Intel Core i7",
+      price: 380,
+      category: "CPU",
+      image: "https://img.magnific.com/premium-vector/processor-cpu-vector-design-template_471203-1174.jpg",
+      incompatibleWith: ["mobo-3", "mobo-4"]
+    },
+    {
+      id: "cpu-3",
+      name: "AMD Ryzen 5",
+      price: 200,
+      category: "CPU",
+      image: "https://img.magnific.com/premium-vector/processor-cpu-vector-design-template_471203-1174.jpg",
+      incompatibleWith: ["mobo-1", "mobo-2"]
+    },
 
-  //   {
-  //     id: "mobo-1",
-  //     name: "Intel Basic Board",
-  //     price: 120,
-  //     category: "Motherboard",
-  //     image: "http://png.pngtree.com/png-vector/20230208/ourmid/pngtree-motherboard-vector-icon-design-illustration-png-image_6591858.png",
-  //     incompatibleWith: ["cpu-3"]
-  //   },
-  //   {
-  //     id: "mobo-2",
-  //     name: "Intel High-End Board",
-  //     price: 600,
-  //     category: "Motherboard",
-  //     image: "http://png.pngtree.com/png-vector/20230208/ourmid/pngtree-motherboard-vector-icon-design-illustration-png-image_6591858.png",
-  //     incompatibleWith: ["cpu-3"]
-  //   },
-  //   {
-  //     id: "mobo-3",
-  //     name: "AMD Basic Board",
-  //     price: 110,
-  //     category: "Motherboard",
-  //     image: "http://png.pngtree.com/png-vector/20230208/ourmid/pngtree-motherboard-vector-icon-design-illustration-png-image_6591858.png",
-  //     incompatibleWith: ["cpu-1", "cpu-2"]
-  //   },
+    {
+      id: "mobo-1",
+      name: "Intel Basic Board",
+      price: 120,
+      category: "Motherboard",
+      image: "http://png.pngtree.com/png-vector/20230208/ourmid/pngtree-motherboard-vector-icon-design-illustration-png-image_6591858.png",
+      incompatibleWith: ["cpu-3"]
+    },
+    {
+      id: "mobo-2",
+      name: "Intel High-End Board",
+      price: 600,
+      category: "Motherboard",
+      image: "http://png.pngtree.com/png-vector/20230208/ourmid/pngtree-motherboard-vector-icon-design-illustration-png-image_6591858.png",
+      incompatibleWith: ["cpu-3"]
+    },
+    {
+      id: "mobo-3",
+      name: "AMD Basic Board",
+      price: 110,
+      category: "Motherboard",
+      image: "http://png.pngtree.com/png-vector/20230208/ourmid/pngtree-motherboard-vector-icon-design-illustration-png-image_6591858.png",
+      incompatibleWith: ["cpu-1", "cpu-2"]
+    },
 
-  //   {
-  //     id: "ram-1",
-  //     name: "16GB RAM",
-  //     price: 70,
-  //     category: "RAM",
-  //     image: "https://png.pngtree.com/png-clipart/20220105/ourmid/pngtree-buckle-free-hand-drawn-computer-memory-module-png-image_4080924.png",
-  //     incompatibleWith: []
-  //   },
-  //   {
-  //     id: "ram-2",
-  //     name: "32GB RAM",
-  //     price: 130,
-  //     category: "RAM",
-  //     image: "https://png.pngtree.com/png-clipart/20220105/ourmid/pngtree-buckle-free-hand-drawn-computer-memory-module-png-image_4080924.png",
-  //     incompatibleWith: []
-  //   }
-  // ])
-  const {data: items, isPending, error} = useItems()
+    {
+      id: "ram-1",
+      name: "16GB RAM",
+      price: 70,
+      category: "RAM",
+      image: "https://png.pngtree.com/png-clipart/20220105/ourmid/pngtree-buckle-free-hand-drawn-computer-memory-module-png-image_4080924.png",
+      incompatibleWith: []
+    },
+    {
+      id: "ram-2",
+      name: "32GB RAM",
+      price: 130,
+      category: "RAM",
+      image: "https://png.pngtree.com/png-clipart/20220105/ourmid/pngtree-buckle-free-hand-drawn-computer-memory-module-png-image_4080924.png",
+      incompatibleWith: []
+    }
+  ])
+
+  // const {data: items, isPending, error} = useItems()
   const { update, undo, redo, selectedItems, total } = useTotal()
   const [isExtracting, setIsExtracting] = useState(false)
 
@@ -129,13 +130,9 @@ const BuildBundle = () => {
     return () => window.removeEventListener("keydown", handleKey)
   }, [])
 
-  if (isPending) {
-    return <div>Loading...</div>
-  }
+  // if (isPending) return <div>Loading...</div>
 
-  if (error) {
-    return <div>Error try after some minutes</div>
-  }
+  // if (error) return <div>Error try after some minutes</div>
 
   return (
     <div>
